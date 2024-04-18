@@ -56,10 +56,10 @@ class LTMAgents():
             Each memory will have a memory and memory type. Your job is to retrieve both values
             This will be used to inform the AI on applicable preferences and restrictions the user may have.
 
-
             Take the context and retrieve and combine the relevant memories utilizing the retrieve_memories and _concatenate_memo_texts MemoryTools provided.
             You should retrieve the memory and type of memory.
-            Provide the combined memories as a succinct bulleted list of of the user's properties, preferences and restrictions.
+            If no relevant memories are retrieved, only respond with No Memories Found
+            If memories are retrieved, provide the combined memories as a succinct bulleted list of of the user's properties, preferences and restrictions.
             """,
             verbose=True,
             max_iter=3,

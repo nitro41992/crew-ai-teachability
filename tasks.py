@@ -40,6 +40,8 @@ class MemoryTasks():
 
             Take the context and retrieve the relevant memories utilizing the retrieve_memories and _concatenate_memo_texts MemoryTools provided.
             Retrieve the memory and type of memory.
+
+            If no relevant memories are retrieved, only respond with No Memories Found
             Take a deep breath, think step by step and retrieve the memories from the database relevant to the most recent message.
 
             Most Recent Message: {user_comment}
