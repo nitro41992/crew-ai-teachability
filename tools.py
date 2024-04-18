@@ -2,6 +2,8 @@ from langchain.agents import tool
 from memo_store import MemoStore
 
 memo_store = MemoStore(verbosity=0, reset=True, path_to_db_dir="./tmp/teachable_agent_db")
+max_number_of_retrieved_results = 10
+max_threshold = 3
 
 class MemoryTools():
     @tool
@@ -14,7 +16,7 @@ class MemoryTools():
     def retrieve_memories(input_text: str) -> list:
         """Returns semantically related memos from the DB."""
         memo_list = memo_store.get_related_memos(
-            input_text, n_results=10, threshold=1.5
+            input_text, n_results=max_number_of_retrieved_results, threshold=max_threshold
         )
 
         if len(memo_list) == 0:

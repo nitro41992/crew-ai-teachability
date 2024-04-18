@@ -18,11 +18,11 @@ class LTMAgents():
             2. If it has any information worth recording.
 
             You should only respond with the type of property and the value (ex. Dislike: Bananas). 
-            Absolutely no other information should be provided.
+            If there are multiple properties, make sure to provide absolutely all memories as a list.
             Take a deep breath, think step by step, and then analyze the message.
             """,
             verbose=True,
-            max_iter=3,
+            max_iter=5,
             allow_delegation=False
         )
 
@@ -32,15 +32,18 @@ class LTMAgents():
             goal='Decides whether to store something from one user comment in the database.',
             tools=[MemoryTools.insert_memory],
             backstory="""
-            You will receive a memory from the context_specialist agent that they considered should be stored in the database.
-            Your role is to commit the memory to the database utilizing the insert_memory tool in MemoryTools.
+            You will receive memories from the context_specialist agent that they considered should be stored in the database.
+            Your role is to commit the memories to the database utilizing the insert_memory tool in MemoryTools.
+            If muliple memories are provided, insert each into the database.
 
-            Take the property type and the property value provided by the context_specialist and store it in the memory store utilizing the MemoryTools provided.
-            Pass in the memory store object into the insert_memory tool and insert the memory into the database.
+            Check with the retrieval_agent to make sure that the memory does not already exist. Do not insert it into the database if it already exists.
+
+            Take the property type and the property value for each memory provided by the context_specialist and store it in the memory store utilizing the MemoryTools provided.
+            Pass in the memory store object into the insert_memory tool and insert the memories into the database.
             """,
             verbose=True,
-            max_iter=3,
-            allow_delegation=False
+            max_iter=5,
+            allow_delegation=True
         )
     
     def retrieval_agent(self):
@@ -62,6 +65,6 @@ class LTMAgents():
             If memories are retrieved, provide the combined memories as a succinct bulleted list of of the user's properties, preferences and restrictions.
             """,
             verbose=True,
-            max_iter=3,
-            allow_delegation=False
+            max_iter=5,
+            allow_delegation=True
         )
