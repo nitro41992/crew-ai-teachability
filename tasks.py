@@ -32,6 +32,23 @@ class MemoryTasks():
             async_execution=False
     )
 
+    def retrieve_and_combine_relevant_memories(self, agent, user_comment):
+        return Task(
+            description=f"""
+            Utilize the context of the current user message to retrieve and combine relevant memories.
+            This will be used to inform the AI on applicable preferences and restrictions the user may have.
+
+            Take the context and retrieve the relevant memories utilizing the retrieve_memories and _concatenate_memo_texts MemoryTools provided.
+            Retrieve the memory and type of memory.
+            Take a deep breath, think step by step and retrieve the memories from the database relevant to the most recent message.
+
+            Most Recent Message: {user_comment}
+            """,
+            expected_output=f"""The relevant memories and memory types from the database.""",
+            agent=agent,
+            async_execution=False
+    )
+
 
   
 
