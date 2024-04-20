@@ -7,9 +7,9 @@ class MemoryTasks():
             Here is the USER_MESSAGE: {user_comment}
             Analyze the given USER_MESSAGE and decide whether it contains advice and an associated task and insert it into the database accordingly. Follow these steps:
                 1. Check if any part of the USER_MESSAGE asks the agent to perform a task or solve a problem.
-                If not, stop here.
+                If not, don't insert anything and do not proceed with the rest of the steps.
                 2. If the USER_MESSAGE asks the agent to perform a task or solve a problem, try to extract any advice from the USER_MESSAGE that may be useful for a similar but different task in the future. 
-                3. If advice is found, extract just the task from the USER_MESSAGE. Don't solve it or include any advice.
+                3. If advice is found, extract just the task from the USER_MESSAGE.
                 4. Summarize the extracted task very briefly and in general terms. Leave out details that might not appear in a similar problem.
                 5. If a task and advice pair is identified, use the insert_memory tool, with the generalized task as the input and the advice as the output to insert the pair into the database.
             
@@ -54,6 +54,19 @@ class MemoryTasks():
                 8. Remove any duplicate memos from the list to avoid redundancy.
             """,
             expected_output=f"""The relevant memos retrieved from the database in a neat bulleted list with duplicates removed.""",
+            agent=agent,
+            async_execution=False
+    )
+
+    def provide_nutrition_task(self, agent, user_comment):
+        return Task(
+            description=f"""You are a helpful assistant. You specialize in providing nutrition advice and meal plans. You are very cognizant of the user's
+            preferences and restrictions. If context and personalized information is provided to you by the Retrieval Specialist, use it
+            to respond to the best of your ability to the user.
+
+            Respond to the user based on their request: {user_comment}
+            """,
+            expected_output=f"""Your nutritional expert response to the user based on their request.""",
             agent=agent,
             async_execution=False
     )

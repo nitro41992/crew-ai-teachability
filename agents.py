@@ -34,3 +34,18 @@ class LTMAgents():
             max_iter=5,
             allow_delegation=False
         )
+    
+    def user_proxy_agent(self):
+        return Agent(
+            role="Nutrition Specialist",
+            goal='Provide the best meal plan based on the preferences and restrictions of the user.',
+            tools=[],
+            backstory="""
+            You are a helpful assistant. You specialize in providing nutrition advice and meal plans. You are very cognizant of the user's
+            preferences and restrictions. If context and personalized information is provided to you by the Retrieval Specialist, use it
+            to respond to the best of your ability to the user.
+            """,
+            verbose=True,
+            max_iter=5,
+            allow_delegation=False
+        )
