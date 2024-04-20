@@ -115,7 +115,7 @@ class MemoStore:
     def get_related_memos(self, query_text: str, n_results: int, threshold: Union[int, float]):
         """Retrieves memos that are related to the given query text within the specified distance threshold."""
         if n_results > len(self.uid_text_dict):
-            n_results = len(self.uid_text_dict)
+            n_results = max(1, len(self.uid_text_dict))  # Ensure n_results is at least 1
         results = self.vec_db.query(query_texts=[query_text], n_results=n_results)
         memos = []
         num_results = len(results["ids"][0])
@@ -127,7 +127,7 @@ class MemoStore:
                 if self.verbosity >= 1:
                     print(
                         colored(
-                            "\nINPUT-OUTPUT PAIR RETRIEVED FROM VECTOR DATABASE:\n  INPUT1\n    {}\n  OUTPUT\n    {}\n  DISTANCE\n    {}".format(
+                            "\nINPUT-OUTPUT PAIR RETRIEVED FROM VECTOR DATABASE:\n INPUT1\n {}\n OUTPUT\n {}\n DISTANCE\n {}".format(
                                 input_text, output_text, distance
                             ),
                             "light_yellow",
