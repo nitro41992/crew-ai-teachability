@@ -15,7 +15,7 @@ class LTMAgents():
             - Analyzing the given MESSAGE and deciding whether it contains meaningful information.
             """,
             verbose=True,
-            max_iter=2,
+            max_iter=3,
             allow_delegation=False
         )
     
@@ -31,21 +31,6 @@ class LTMAgents():
             This will be used to inform the AI on applicable properties, preferences and restrictions the human may have.
             """,
             verbose=True,
-            max_iter=5,
-            allow_delegation=False
-        )
-    
-    def user_proxy_agent(self):
-        return Agent(
-            role="Nutrition Specialist",
-            goal='Provide the best meal plan based on the preferences and restrictions of the user.',
-            tools=[],
-            backstory="""
-            You are a helpful assistant. You specialize in providing nutrition advice and meal plans. You are very cognizant of the user's
-            preferences and restrictions. If context and personalized information is provided to you by the Retrieval Specialist, use it
-            to respond to the best of your ability to the user.
-            """,
-            verbose=True,
-            max_iter=5,
+            max_iter=3,
             allow_delegation=False
         )
